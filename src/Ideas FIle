@@ -1,0 +1,109 @@
+Functional modules -
+    Client
+    Server
+    Simulator
+    Client Selector
+    Aggregation module
+
+## Dir structure
+src-
+    |--Server
+    |--|--server.py
+    |--|--utils.py
+    |--|--Aggreggation
+    |--|--|--fedavg.py
+    |--|--|--__init__.py
+    |--Client
+    |--|--data
+    |--|--client.py
+    |--|--utils.py
+    |--|--models
+    |--|--|--resnet18
+    |--|--|--Mobilenetv2
+    |--Simulator
+    |--|--
+    |--|--utils.py
+    |--|--gRPC control
+    |--|--|--<.proto> (fully customizatble) 
+    |--|--Data Distributor
+    |--|--|--__init__.py
+    |--|--|--uniform.py
+    |--|--Client Selector
+    |--|--|--__init__.py
+    |--|--|--random.py
+    |--|--Logger
+    |--|--|--Outputs
+    |--|--|--logger.py
+    |--|--Attacks (Director to store custom attack strategies - bash files -- Develop in phase2)
+    |--utils
+    |--|--parser.py
+    |--Examples
+    |--|--Tutorials.ipynb (Phase 2)
+    |--reuirements.txt
+    |--run.py
+    
+    
+
+
+## Client Interface code
+Client
+|--__init__()
+|--|--mode
+|--|--Name ID
+|--|--Clock
+|--|--Status (bool)
+|--send parameter function
+|--send configuration
+|--recieve parameters
+|--send logs and metrics
+|--Recieve configuration
+|--train
+|--eval
+
+## Server Interface code
+Server
+|--__init__()
+|--|--mode
+|--|--Name
+|--|--Status (bool)
+|--|--Buffer
+|--|--Clock --bottleneck
+|--send parameters
+|--Send configuration (FLeet)
+|--receive parameters
+|--send logs and metrics
+|--recieve configuration
+|--aggregate
+|--call eval on selected/all clients
+
+## Simulator.py
+1. Initialize client and server objects
+2. Start Server and then Clients, their respective clocks and training
+3. Logger object
+    |--Bundle of Dataframes
+    |--Identify each logs-df by name
+4. Make matplotlib/sns images
+
+
+methodology
+-- simulation:
+    -- python multiprocessing
+    -- grpc for communication between the server and clients
+
+work division:
+chaitanya
+    -- multiprocessing
+    -- server
+hemanth
+    -- grpc for communication
+    -- client and utils
+vaibhav
+    -- argument parser
+    -- utils
+    -- simulator
+    -- logging
+    -- attacks (phase 2)
+
+
+-> automatic model selection
+-> automatic folders creation in logs folder for saved_models, metics etc
