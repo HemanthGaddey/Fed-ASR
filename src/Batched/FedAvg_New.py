@@ -1,5 +1,5 @@
 import numpy as np
-from Models.simple_model import SimpleModel
+#from Models.simple_model import SimpleModel
 import torch
 
 def running_model_avg(current, next, scale):
@@ -12,7 +12,7 @@ def running_model_avg(current, next, scale):
             current[key] = current[key] + (next[key] * scale)
     return current
 
-def Fedavg(models):#, agg_client_models, selected_model_ids):
+def Fedavg(models, template_model):#, agg_client_models, selected_model_ids):
     num_clients=len(models)
     running_avg = None
     for model in models:
@@ -21,4 +21,5 @@ def Fedavg(models):#, agg_client_models, selected_model_ids):
 
     # for id in selected_model_ids:
     #     agg_client_models[id]={'model':running_avg}
-    return running_avg#agg_client_models
+    template_model.load_state_dict(running_avg)
+    return template_model#agg_client_models
